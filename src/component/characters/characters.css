@@ -1,0 +1,33 @@
+li, ul{
+    list-style: none;
+    margin: 0 0;
+    padding: 0 0;
+}
+.characterBlock{
+    position: relative;
+}
+.charactersItem{
+    border: red 1px dashed;
+    width: 45%;
+    background-color: white;
+    padding: 0.3rem 1rem 0.3rem 1rem;
+    font-size: 1.2rem;
+}
+.charactersItem li{
+    padding-top: 5px;
+}
+.charactersItem li:nth-child(odd), .charactersItem li:nth-child(even){
+    border-top: black 1px solid;
+    border-color: darkgray;
+}
+.charactersItem li:nth-child(1){
+    border:none;
+}
+.charactersDescription{
+    position: absolute;
+    right: 0;
+    top: 0;
+    width: 40%;
+    background-color: white;
+    padding: 0.3rem 1rem 0.3rem 1rem;
+}

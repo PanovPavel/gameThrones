@@ -1,0 +1,37 @@
+.randomCharacter{
+    border: red 1px dashed;
+    width: 45%;
+    margin-top: 20px;
+    background-color: white;
+    padding: 10px 1rem 0px 1rem;
+}
+.title{
+    font-size: 20px;
+    font-weight: 700;
+    text-align: center;
+}
+.randomCharacterDescription{
+    font-size: 20px;
+    margin-top: 10px;
+}
+.randomCharacterDescription div:nth-child(odd), .randomCharacterDescription div:nth-child(even) {
+    display: flex;
+    justify-content: space-between;
+    padding: 8px 0;
+    border-top: black 1px solid;
+    border-color: darkgray;
+}
+.randomCharacterDescription mark{
+    background: none;
+    font-weight: 700;
+}
+.buttonChangeCharacter{
+    font-size: 20px;
+    color: white;
+    border: none;
+    border-radius: 0.4em;
+    background: cornflowerblue;
+    height: 2em;
+    width: 10em;
+    margin: 25px 0;
+}

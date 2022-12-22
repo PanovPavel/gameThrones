@@ -1,0 +1,26 @@
+a{
+    color: white;
+    text-decoration: none;
+}
+a:visited{
+    color: white;
+}
+header{
+    display: flex;
+    /*border: red 1px dashed;*/
+    color: white;
+    justify-content: space-between;
+    align-items: center;
+}
+.caption{
+    /*border: red 1px dashed;*/
+    font-size: 30px;
+    font-weight: 700;
+}
+menu{
+    display: flex;
+    /*border: red 1px dashed;*/
+}
+menu nav{
+    padding-left: 20px;
+}

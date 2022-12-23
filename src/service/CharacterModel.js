@@ -1,4 +1,4 @@
- export default class CharacterModel{
+export default class CharacterModel{
     constructor() {
         this.url = 'https://anapioficeandfire.com/api';
     }
@@ -10,8 +10,9 @@
                 return  response.json();
             })
     }
-    getAllCharacters(){
-        return this.connectResource('/characters')
+    async getAllCharacters() {
+        const res = await this.connectResource('/characters')
+        return res.map(this._transformCharacter)
     }
     async getCharacter(id) {
         const res = await this.connectResource("/characters/" + id);
@@ -20,19 +21,19 @@
 
     _transformCharacter(char){
              return  {
-                    name: char.name,
-                    gender: char.gender,
-                    born: char.born,
-                    died: char.died,
-                    culture: char.culture,
+                    name: char.name || 'Error',
+                    gender: char.gender || 'нет данных',
+                    born: char.born || 'нет данных',
+                    died: char.died || 'нет данных',
+                    culture: char.culture || 'нет данных',
                 }
     }
 }
 
 const characterModel = new CharacterModel();
-// characterModel.getAllCharacters()
-//     .then(res => console.log(res))
-//     .catch(error => console.log(error))
+characterModel.getAllCharacters()
+    .then(res => console.log(res))
+    .catch(error => console.log(error))
 characterModel.getCharacter(50)
     .then(res => console.log(res))
     .catch(error => console.log(error))

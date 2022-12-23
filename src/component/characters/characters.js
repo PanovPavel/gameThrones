@@ -8,7 +8,7 @@ export default class Characters extends Component{
     constructor(props) {
         super(props);
         this.state = {
-            id: `50`
+            id: `52`
         }
     }
     render() {

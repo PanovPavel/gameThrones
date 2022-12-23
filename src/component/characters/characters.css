@@ -27,6 +27,7 @@ li, ul{
     position: absolute;
     right: 0;
     top: 0;
+    height: 210px;
     width: 40%;
     background-color: white;
     padding: 0.3rem 1rem 0.3rem 1rem;

@@ -1,6 +1,7 @@
 .randomCharacter{
     border: red 1px dashed;
     width: 45%;
+    height: 250px;
     margin-top: 20px;
     background-color: white;
     padding: 10px 1rem 0px 1rem;
@@ -34,4 +35,15 @@
     height: 2em;
     width: 10em;
     margin: 25px 0;
+    transition: background-color 0.5s step-start;
+
 }
+.buttonChangeCharacter:active{
+    background: #d4e7ff;
+    color: black;
+}
+
+
+
+
+

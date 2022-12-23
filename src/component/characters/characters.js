@@ -5,6 +5,12 @@ import CharactersItem from "../characterItem/charactersItem";
 import DescriptionCharacter from "../descriptionCharacter/descriptionCharacter";
 
 export default class Characters extends Component{
+    constructor(props) {
+        super(props);
+        this.state = {
+            id: `50`
+        }
+    }
     render() {
         return(
             <>
@@ -17,8 +23,7 @@ export default class Characters extends Component{
                             </ul>
                         </div>
                         <div className={'charactersDescription'}>
-                            <div className={'title'}>John Snow</div>
-                            <DescriptionCharacter></DescriptionCharacter>
+                            <DescriptionCharacter id={this.state.id}></DescriptionCharacter>
                         </div>
                     </div>
                 </div>

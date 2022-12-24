@@ -20,13 +20,12 @@ export default class CharacterModel{
                 return  response.json();
             })
     }
-
     /**
      * Получить всех персонажей
      * @return {Promise<*>}
      */
     async getAllCharacters() {
-        const res = await this._connectResource('/characters')
+        const res = await this._connectResource('/characters?page=10')
         return res.map(this.#transformCharacter)
     }
 
@@ -48,7 +47,7 @@ export default class CharacterModel{
      */
     #transformCharacter(char){
              return  {
-                    name: char.name || 'Error',
+                    name: char.name || 'нет данных',
                     gender: char.gender || 'нет данных',
                     born: char.born || 'нет данных',
                     died: char.died || 'нет данных',

@@ -33,7 +33,6 @@ export default class DescriptionCharacter extends React.Component{
             })
     }
 
-
     /**
      * Изменяет state
      * @method

@@ -22,7 +22,6 @@ export default class Characters extends Component{
                     <div className={`characterBlock`}>
                         <div className='charactersItem'>
                             <ul>
-                                <li>John Snow</li>
                                 <CharactersItem></CharactersItem>
                             </ul>
                         </div>

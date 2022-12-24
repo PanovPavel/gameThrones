@@ -1,5 +1,7 @@
 body {
   margin: 0;
+  background: black url("component/app/8e59868b7b312a97ade0098a6f80c759.jpeg") no-repeat fixed center;
+  background-size: cover;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
     'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
     sans-serif;

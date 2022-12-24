@@ -1,6 +1,10 @@
 import React from "react";
 import './spinner.css'
 
+/**
+ * Возвращает спинер загрузки
+ * @returns {JSX.Element}
+ */
 const Spinner = ()=>{
     return(
         <>

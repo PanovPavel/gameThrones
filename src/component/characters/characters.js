@@ -4,6 +4,10 @@ import '../characterItem/charactersItem'
 import CharactersItem from "../characterItem/charactersItem";
 import DescriptionCharacter from "../descriptionCharacter/descriptionCharacter";
 
+/**
+ * Блок с описание конкретного персонажа
+ * @return {JSX.Element}
+ */
 export default class Characters extends Component{
     constructor(props) {
         super(props);

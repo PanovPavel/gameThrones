@@ -1,7 +1,7 @@
 .randomCharacter{
     border: red 1px dashed;
-    width: 45%;
-    height: 250px;
+    width: 60%;
+    max-height: 270px;
     margin-top: 20px;
     background-color: white;
     padding: 10px 1rem 0px 1rem;

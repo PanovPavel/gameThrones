@@ -2,26 +2,58 @@ import React from "react";
 import "./descriptionCharacter.css"
 import CharacterModel from "../../service/CharacterModel";
 import Spinner from '../laod-spinner/spinner'
+
+/**
+ * Блок возвращает структуру описания персонажа
+ * @return {JSX.Element}
+ */
 export default class DescriptionCharacter extends React.Component{
     constructor(props) {
         super(props);
-        this.charaterModel = new CharacterModel();
-        this.state = {
-            charact: {},
-            load: false
-        }
-        this.onChangeRandom();
     }
-    onChangeRandom(){
-        this.charaterModel.getCharacter(this.props.id)
+    state = {
+        charact: {},
+        load: false,
+        id: this.props.id
+    }
+     componentDidMount() {
+        this.changeIdState();
+        this.charaterModel = new CharacterModel();
+        this.getDataCharacter(this.state.id);
+    }
+
+    /**
+     * Получение данных от сервера
+     * @method
+     * @param {number} id - id получаймого персонажа
+     */
+    getDataCharacter(id){
+        this.charaterModel.getCharacter(id)
             .then((char)=>{
-                this.setState(state=>{
-                    return{
-                        load: true,
-                        charact: char,
-                    }
-                })
+                this.changeState(char);
             })
+    }
+
+    changeIdState(){
+        this.setState(state=>{
+            return{
+                id: Math.floor(Math.random()*100+25)
+            }
+        })
+    }
+
+    /**
+     * Изменяет state
+     * @method
+     * @param char - объект персонажа
+     */
+    changeState(char){
+        this.setState(state=>{
+            return{
+                load: true,
+                charact: char,
+            }
+        })
     }
     render() {
         return(
@@ -29,11 +61,15 @@ export default class DescriptionCharacter extends React.Component{
                 {
                     (this.state.load)?<DescriptionCharacterData characterData={this.state.charact}></DescriptionCharacterData>:<Spinner/>
                 }
+                <div>{this.state.id}</div>
             </>
         )
     }
 }
-
+/**
+ * Гененрирует описание персонажа
+ * @returns {JSX.Element}
+ */
 const DescriptionCharacterData = (props)=>{
     const {name, gender, born, died, culture} = props.characterData;
     return(

@@ -1,51 +1,62 @@
 import React,{Component} from "react";
 import './randomCharacter.css'
 import DescriptionCharacter from '../descriptionCharacter/descriptionCharacter'
+
+/**
+ * Блок с описание рандомного пресонажа
+ */
 export default class RandomCharacter extends Component{
     constructor(props) {
         super(props);
+        this.onHiddenBlock = this.onHiddenBlock.bind(this);
         this.state = {
-            id: 50,
+            id: Math.floor(Math.random()*100+50),
             hidden: false
         }
-        this.onHiddenRandom = this.onHiddenRandom.bind(this);
-    }
-    componentDidMount(){
-        setTimeout(()=>{this.changeId()}, 3000)
     }
 
-    onHiddenRandom() {
+
+    onRandomId(){
         this.setState(state=>{
-            console.log(this.state.hidden);
-            return {
-                hidden: !this.state.hidden
+            return{
+                id: Math.floor(Math.random()*100+50)
             }
         })
     }
-    changeId(){
-        this.setState(state=>{
-            return{
-                id: Math.floor(Math.random()*100+25)
-            }
+    onHiddenBlock() {
+        if(this.state.hidden) this.onRandomId();
+        this.setState({
+                hidden: !this.state.hidden
         })
     }
     render() {
-        const {hidden} = this.state;
+        const {hidden, id} = this.state;
         return(
             <>
                 <div className={'content'}>
-                    {hidden? '' : <BlockRandom id={this.state.id}/>}
-                    <button onClick={()=>this.onHiddenRandom()} className={'buttonChangeCharacter'}>Random hidden</button>
+                    {hidden? '' : <BlockRandom id={id} changeId={()=>this.onRandomId()}/>}
+                    <button onClick={()=>this.onHiddenBlock()} className={'buttonChangeCharacter'}>Random hidden</button>
                 </div>
             </>
         )
     }
 }
-const BlockRandom = (props)=>{
-    return(
-            <div className={'randomCharacter'}>
-                <div className={'title'}>Random person</div>
-                <DescriptionCharacter id={props.id}></DescriptionCharacter>
-            </div>
-    )
+class BlockRandom extends Component{
+    constructor(props) {
+        super(props)
+    }
+    componentDidMount() {
+        console.log(`componentDidMount`)
+    }
+    componentWillUnmount() {
+        console.log(`componentWillUnmount`)
+    }
+    render() {
+        return(
+                <div className={'randomCharacter'}>
+                    <div className={'title'}>Random person</div>
+                    <DescriptionCharacter id={this.props.id} changeId={this.props.changeId}></DescriptionCharacter>
+                </div>
+        )
+    }
 }

@@ -47,6 +47,8 @@ export default class CharacterModel{
      */
     #transformCharacter(char){
              return  {
+                    url: char.url || '',
+                    id: char.url.match(/(?<=\/)(.\d)(.*)/g).join(""),
                     name: char.name || 'нет данных',
                     gender: char.gender || 'нет данных',
                     born: char.born || 'нет данных',

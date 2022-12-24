@@ -16,6 +16,7 @@ export default class DescriptionCharacter extends React.Component{
         load: false,
         id: this.props.id
     }
+
      componentDidMount() {
         this.charaterModel = new CharacterModel();
         this.getDataCharacter(this.state.id);

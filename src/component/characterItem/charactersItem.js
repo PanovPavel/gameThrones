@@ -9,13 +9,12 @@ import style from './descriptionItem.module.css'
 export default  class CharactersItem extends Component{
     constructor(props) {
         super(props);
+        this.onCharSelected = this.onCharSelected.bind(this);
     }
     state = {
-        character: []
+        character: [],
+        selectID: 0
     }
-    /**
-     * получить перснажей из бд
-     */
     getCharacters(){
         const charModel = new CharacterModel();
         charModel.getAllCharacters()
@@ -30,17 +29,22 @@ export default  class CharactersItem extends Component{
     componentDidMount() {
         this.getCharacters();
     }
-    onCharSelected(){
-        console.log('click')
+    onCharSelected(id){
+        console.log('click' + id);
+        this.setState(state=>{
+            return {
+                selectID: id
+            }
+        })
+        this.props.onChangeId(id);
     }
 
 
     render() {
         const {character} = this.state
-        let i = 1;
         const AllChar = character.map((item)=>{
             return(
-                <li className={style} key={i++} onClick={()=>this.onCharSelected()}>{item.name}</li>
+                <li className={style} key={item.id} onClick={()=>this.onCharSelected(item.id)}>{item.name}</li>
             )
         })
         return(

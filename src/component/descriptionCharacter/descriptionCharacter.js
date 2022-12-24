@@ -17,7 +17,6 @@ export default class DescriptionCharacter extends React.Component{
         id: this.props.id
     }
      componentDidMount() {
-        this.changeIdState();
         this.charaterModel = new CharacterModel();
         this.getDataCharacter(this.state.id);
     }
@@ -34,13 +33,6 @@ export default class DescriptionCharacter extends React.Component{
             })
     }
 
-    changeIdState(){
-        this.setState(state=>{
-            return{
-                id: Math.floor(Math.random()*100+25)
-            }
-        })
-    }
 
     /**
      * Изменяет state

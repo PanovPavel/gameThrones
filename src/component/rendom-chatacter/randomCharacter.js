@@ -14,9 +14,7 @@ export default class RandomCharacter extends Component{
             hidden: false
         }
     }
-
-
-    onRandomId(){
+    changeRandomId(){
         this.setState(state=>{
             return{
                 id: Math.floor(Math.random()*100+50)
@@ -24,7 +22,6 @@ export default class RandomCharacter extends Component{
         })
     }
     onHiddenBlock() {
-        if(this.state.hidden) this.onRandomId();
         this.setState({
                 hidden: !this.state.hidden
         })
@@ -34,7 +31,7 @@ export default class RandomCharacter extends Component{
         return(
             <>
                 <div className={'content'}>
-                    {hidden? '' : <BlockRandom id={id} changeId={()=>this.onRandomId()}/>}
+                    {hidden? '' : <BlockRandom id={id} changeRandomId={() => this.changeRandomId()}/>}
                     <button onClick={()=>this.onHiddenBlock()} className={'buttonChangeCharacter'}>Random hidden</button>
                 </div>
             </>
@@ -45,8 +42,11 @@ class BlockRandom extends Component{
     constructor(props) {
         super(props)
     }
+    state = {
+        id: this.props.id
+    }
     componentDidMount() {
-        console.log(`componentDidMount`)
+        this.props.changeRandomId();
     }
     componentWillUnmount() {
         console.log(`componentWillUnmount`)
@@ -55,7 +55,7 @@ class BlockRandom extends Component{
         return(
                 <div className={'randomCharacter'}>
                     <div className={'title'}>Random person</div>
-                    <DescriptionCharacter id={this.props.id} changeId={this.props.changeId}></DescriptionCharacter>
+                    <DescriptionCharacter id={this.state.id}></DescriptionCharacter>
                 </div>
         )
     }

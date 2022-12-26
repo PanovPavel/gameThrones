@@ -5,6 +5,7 @@ li, ul{
 }
 .characterBlock{
     position: relative;
+    margin-bottom: 20px;
 }
 .charactersItem{
     border: red 1px dashed;

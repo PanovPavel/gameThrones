@@ -1,0 +1,19 @@
+.error{
+    position: fixed;
+    top: 25%;
+    left: 25%;
+    width: 50%;
+    height: 50%;
+    z-index:99;
+    background-color: black;
+    color: white;
+}
+.textError{
+    margin: 0;
+    border: black 1px dashed;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin-right: -50%;
+    transform: translate(-50%, -50%);
+}

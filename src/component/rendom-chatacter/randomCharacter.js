@@ -45,6 +45,7 @@ class BlockRandom extends Component{
     componentWillUnmount() {
         console.log(`componentWillUnmount`)
     }
+
     render() {
         return(
                 <div className={'randomCharacter'}>

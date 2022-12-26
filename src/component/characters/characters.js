@@ -15,6 +15,9 @@ export default class Characters extends Component{
             id: 52
         }
     }
+    componentDidCatch() {
+        console.log('error');
+    }
     onChangeId(id){
         console.log("*****************************" + id)
         this.setState({

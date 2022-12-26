@@ -7,10 +7,6 @@ import style from './descriptionItem.module.css'
  * @return {JSX.Element}
  */
 export default  class CharactersItem extends Component{
-    constructor(props) {
-        super(props);
-        this.onCharSelected = this.onCharSelected.bind(this);
-    }
     state = {
         character: [],
         selectID: 0
@@ -19,10 +15,8 @@ export default  class CharactersItem extends Component{
         const charModel = new CharacterModel();
         charModel.getAllCharacters()
             .then(res => {
-                this.setState(state=>{
-                    return{
+                this.setState({
                         character: res
-                    }
                 })
             });
     }
@@ -31,10 +25,8 @@ export default  class CharactersItem extends Component{
     }
     onCharSelected(id){
         console.log('click' + id);
-        this.setState(state=>{
-            return {
+        this.setState({
                 selectID: id
-            }
         })
         this.props.onChangeId(id);
     }

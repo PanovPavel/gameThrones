@@ -8,17 +8,14 @@ import DescriptionCharacter from '../descriptionCharacter/descriptionCharacter'
 export default class RandomCharacter extends Component{
     constructor(props) {
         super(props);
-        this.onHiddenBlock = this.onHiddenBlock.bind(this);
         this.state = {
             id: Math.floor(Math.random()*100+50),
             hidden: false
         }
     }
     changeRandomId(){
-        this.setState(state=>{
-            return{
+        this.setState({
                 id: Math.floor(Math.random()*100+50)
-            }
         })
     }
     onHiddenBlock() {
@@ -39,9 +36,6 @@ export default class RandomCharacter extends Component{
     }
 }
 class BlockRandom extends Component{
-    constructor(props) {
-        super(props)
-    }
     state = {
         id: this.props.id
     }
@@ -55,7 +49,7 @@ class BlockRandom extends Component{
         return(
                 <div className={'randomCharacter'}>
                     <div className={'title'}>Random person</div>
-                    <DescriptionCharacter id={this.state.id}></DescriptionCharacter>
+                    <DescriptionCharacter id={this.state.id}/>
                 </div>
         )
     }

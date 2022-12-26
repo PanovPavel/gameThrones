@@ -14,14 +14,11 @@ export default class Characters extends Component{
         this.state = {
             id: 52
         }
-        this.onChangeId = this.onChangeId.bind(this);
     }
     onChangeId(id){
         console.log("*****************************" + id)
-        this.setState(state=>{
-            return{
+        this.setState({
                 id:id
-            }
         })
     }
     render() {
@@ -32,11 +29,11 @@ export default class Characters extends Component{
                     <div className={`characterBlock`}>
                         <div className='charactersItem'>
                             <ul>
-                                <CharactersItem onChangeId={(id)=>this.onChangeId(id)}></CharactersItem>
+                                <CharactersItem onChangeId={(id)=>this.onChangeId(id)}/>
                             </ul>
                         </div>
                         <div className={'charactersDescription'}>
-                            <DescriptionCharacter id={id}></DescriptionCharacter>
+                            <DescriptionCharacter id={id}/>
                         </div>
                     </div>
                 </div>

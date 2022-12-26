@@ -6,9 +6,9 @@ import Characters from "../characters/characters";
 function App() {
   return (
     <div className="App">
-        <Header></Header>
-        <RandomCharacter></RandomCharacter>
-        <Characters></Characters>
+        <Header/>
+        <RandomCharacter/>
+        <Characters/>
     </div>
   );
 }

@@ -8,20 +8,20 @@ import Spinner from '../laod-spinner/spinner'
  * @return {JSX.Element}
  */
 export default class DescriptionCharacter extends React.Component{
-    constructor(props) {
-        super(props);
-    }
     state = {
         charact: {},
         load: false,
         id: this.props.id
     }
-
-     componentDidMount() {
+    componentDidMount() {
         this.charaterModel = new CharacterModel();
         this.getDataCharacter(this.state.id);
     }
-
+    componentDidUpdate(prevProps, prevState, snapshot) {
+        if(this.state.id !== prevState.id){
+            this.componentDidMount();
+        }
+    }
     /**
      * Получение данных от сервера
      * @method
@@ -33,25 +33,29 @@ export default class DescriptionCharacter extends React.Component{
                 this.changeState(char);
             })
     }
-
+    changeStateId(){
+        this.setState({
+                id: this.props.id
+        })
+    }
     /**
      * Изменяет state
      * @method
      * @param char - объект персонажа
      */
     changeState(char){
-        this.setState(state=>{
-            return{
+        this.setState({
                 load: true,
                 charact: char,
-            }
+                id: this.props.id
         })
+        this.componentDidMount();
     }
     render() {
         return(
             <>
                 {
-                    (this.state.load)?<DescriptionCharacterData characterData={this.state.charact}></DescriptionCharacterData>:<Spinner/>
+                    (this.state.load)?<DescriptionCharacterData characterData={this.state.charact}/>:<Spinner/>
                 }
                 <div>{this.state.id}</div>
             </>

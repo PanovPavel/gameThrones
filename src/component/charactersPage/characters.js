@@ -1,8 +1,9 @@
 import React,{Component} from "react";
 import './characters.css'
-import '../characterItem/charactersItem'
-import CharactersItem from "../characterItem/charactersItem";
+import '../dataList/dataItem'
+import DataItem from "../dataList/dataItem";
 import DescriptionCharacter from "../descriptionCharacter/descriptionCharacter";
+import CharacterModel from "../../service/CharacterModel";
 
 /**
  * Блок с описание конкретного персонажа
@@ -12,32 +13,41 @@ export default class Characters extends Component{
     constructor(props) {
         super(props);
         this.state = {
-            id: 52
+            id: +localStorage.getItem(`charSelect`) || null
         }
-    }
-    componentDidCatch() {
-        console.log('error');
+
     }
     onChangeId(id){
-        console.log("*****************************" + id)
         this.setState({
                 id:id
         })
+        console.log(id + "assdasdsa");
+        localStorage.setItem(`charSelect`, id);
     }
     render() {
         let {id} = this.state
+
+        const description = ()=>{
+            if (id === null) return
+            else {
+                return (
+                    <div className={'charactersDescription'}>
+                        <DescriptionCharacter id={id}/>
+                    </div>
+                )
+            }
+        }
+
         return(
             <>
                 <div className={'content'}>
                     <div className={`characterBlock`}>
                         <div className='charactersItem'>
                             <ul>
-                                <CharactersItem onChangeId={(id)=>this.onChangeId(id)}/>
+                                <DataItem renderItem={(item)=>`${item.name} (${item.gender[0]})`} onChangeId={(id)=>this.onChangeId(id)} data={new CharacterModel().getAllCharacters()}/>
                             </ul>
                         </div>
-                        <div className={'charactersDescription'}>
-                            <DescriptionCharacter id={id}/>
-                        </div>
+                        {description()}
                     </div>
                 </div>
             </>

@@ -1,3 +1,9 @@
+a{
+    color: black;
+}
 li:hover{
     background-color: rgba(231, 225, 225, 0.8);
+}
+li:active{
+    color: red;
 }

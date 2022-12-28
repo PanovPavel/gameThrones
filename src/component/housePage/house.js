@@ -1,10 +1,7 @@
 import React, {Component} from "react";
-import './books.css'
-import BooksModel from "../../service/BooksModel";
 import DataItem from "../dataList/dataItem";
-import CharacterModel from "../../service/CharacterModel";
-
-export default class Books extends Component{
+import HousesModel from "../../service/HousesModel";
+export default class House extends Component{
     state = {
         id: null
     }
@@ -21,7 +18,7 @@ export default class Books extends Component{
                     <div className={`characterBlock`}>
                         <div className='charactersItem'>
                             <ul>
-                                <DataItem renderItem={(item)=>item.name} onChangeId={(id)=>this.onChangeId(id)} data={new BooksModel().getAllBooks()}/>
+                                <DataItem renderItem={(item)=>item.name} onChangeId={(id)=>this.onChangeId(id)} data={new HousesModel().getAllHouses()}/>
                             </ul>
                         </div>
                     </div>

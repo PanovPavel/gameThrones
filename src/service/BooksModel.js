@@ -16,6 +16,8 @@ export default class BooksModel extends Resource{
     #transformBooks(books){
         return{
             name: books.name,
+            url: books.url || '',
+            id: books.url.match(/(?<=\/)(.\d)(.*)|(?<=\/)(\d)/g).join(""),
             authors: books.authors,
             numberOfPages: books.numberOfPages,
             released: books.released

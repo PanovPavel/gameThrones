@@ -37,6 +37,7 @@ export default class DescriptionCharacter extends React.Component{
         this.setState({
                 id: this.props.id
         })
+
     }
     /**
      * Изменяет state
@@ -57,7 +58,6 @@ export default class DescriptionCharacter extends React.Component{
                 {
                     (this.state.load)?<DescriptionCharacterData characterData={this.state.charact}/>:<Spinner/>
                 }
-                <div>{this.state.id}</div>
             </>
         )
     }

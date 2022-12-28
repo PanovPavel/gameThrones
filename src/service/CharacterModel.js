@@ -15,7 +15,7 @@ export default class CharacterModel extends Resource{
 
     /**
      * Получить одного персона
-     * @param id - id получаймого character
+     * @param id - id получаймого dataList
      * @return {Promise<{gender: (string), culture: (string), born: (string), name: string, died: (string)}>}
      */
     async getCharacter(id) {
@@ -24,7 +24,7 @@ export default class CharacterModel extends Resource{
     }
 
     /**
-     * Трансофрмация объекта character к необходимой структуре
+     * Трансофрмация объекта dataList к необходимой структуре
      * @param char - транфсформируемый объыект
      * @return {{gender: (string), culture: (string), born: (string), name: string, died: (string)}}
      * @private
@@ -32,7 +32,7 @@ export default class CharacterModel extends Resource{
     #transformCharacter(char){
              return  {
                     url: char.url || '',
-                    id: char.url.match(/(?<=\/)(.\d)(.*)/g).join(""),
+                    id: char.url.match(/(?<=\/)(.\d)(.*)|(?<=\/)(\d)/g).join(""),
                     name: char.name || 'нет данных',
                     gender: char.gender || 'нет данных',
                     born: char.born || 'нет данных',

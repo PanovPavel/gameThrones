@@ -1,19 +1,22 @@
 import React,{Component} from "react";
-import './charactersItem.css'
-import CharacterModel from "../../service/CharacterModel";
+import './dataItem.css'
 import style from './descriptionItem.module.css'
+import CharacterModel from "../../service/CharacterModel";
 /**
  * Список персонажаей
  * @return {JSX.Element}
  */
-export default  class CharactersItem extends Component{
+export default  class DataItem extends Component{
+    constructor(props) {
+        super(props);
+        this.data = this.props.data;
+    }
     state = {
         character: [],
         selectID: 0
     }
-    getCharacters(){
-        const charModel = new CharacterModel();
-        charModel.getAllCharacters()
+    getData(){
+        this.data
             .then(res => {
                 this.setState({
                         character: res
@@ -21,9 +24,9 @@ export default  class CharactersItem extends Component{
             });
     }
     componentDidMount() {
-        this.getCharacters();
+        this.getData();
     }
-    onCharSelected(id){
+    onDataSelected(id){
         console.log('click' + id);
         this.setState({
                 selectID: id
@@ -31,12 +34,14 @@ export default  class CharactersItem extends Component{
         this.props.onChangeId(id);
     }
 
-
     render() {
         const {character} = this.state
         const AllChar = character.map((item)=>{
+            const name = this.props.renderItem(item)
             return(
-                <li className={style} key={item.id} onClick={()=>this.onCharSelected(item.id)}>{item.name}</li>
+                <li className={style} key={item.id} onClick={()=>this.onDataSelected(item.id)}>
+                    {name}
+                </li>
             )
         })
         return(

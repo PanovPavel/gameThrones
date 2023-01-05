@@ -4,7 +4,6 @@ import '../dataList/dataItem'
 import DataItem from "../dataList/dataItem";
 import DescriptionCharacter from "../descriptionCharacter/descriptionCharacter";
 import CharacterModel from "../../service/CharacterModel";
-
 /**
  * Блок с описание конкретного персонажа
  * @return {JSX.Element}
@@ -21,18 +20,18 @@ export default class Characters extends Component{
         this.setState({
                 id:id
         })
-        console.log(id + "assdasdsa");
         localStorage.setItem(`charSelect`, id);
     }
     render() {
         let {id} = this.state
-
         const description = ()=>{
             if (id === null) return
             else {
                 return (
                     <div className={'charactersDescription'}>
-                        <DescriptionCharacter id={id}/>
+                        <DescriptionCharacter id={id}>
+
+                        </DescriptionCharacter>
                     </div>
                 )
             }

@@ -27,7 +27,6 @@ export default  class DataItem extends Component{
         this.getData();
     }
     onDataSelected(id){
-        console.log('click' + id);
         this.setState({
                 selectID: id
         })
@@ -51,3 +50,4 @@ export default  class DataItem extends Component{
         )
     }
 }
+

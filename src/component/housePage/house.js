@@ -5,41 +5,27 @@ import CharacterModel from "../../service/CharacterModel";
 import DescriptionData from "../descriptionCharacter/descriptionData";
 import {Field} from "../Field/field";
 export default class House extends Component{
-    state = {
-        id: null,
-        houses: {}
-    }
-    onChangeId(id){
-        this.setState({
-            id:id,
-        })
-    }
-    componentDidMount() {
-        this.housesModel = new HousesModel();
-        this.getHousesData(this.state.id);
-    }
-    componentDidUpdate(prevProps, prevState, snapshot) {
-        if(this.state.id !== prevState.id){
-            this.getHousesData(this.state.id);
+    constructor(props) {
+        super(props);
+        this.state = {
+            houses: null,
         }
     }
-    getHousesData(id){
-        this.housesModel.getHouse(id)
-            .then((houses)=>{
-                this.setState({
-                    houses: houses,
-                })
-            })
+    onChangeId = (dataSelected)=>{
+        this.setState({
+            houses: dataSelected,
+        })
     }
+
     render() {
-        // console.log(this.state.charact)
-        let {id} = this.state
+        console.log(this.state.charact)
+        let {houses} = this.state
         const description = ()=>{
-            if (id === null) return
+            if (houses === null) return
             else {
                 return (
                     <div className={'charactersDescription'}>
-                        <DescriptionData id={id} data={this.state.houses}>
+                        <DescriptionData data={houses}>
                             <Field field={`name`} label={`Gender`}></Field>
                             <Field field={`region`} label={`Born`}></Field>
                             <Field field={`coatOfArms`} label={`CoatOfArms`}></Field>
@@ -54,7 +40,13 @@ export default class House extends Component{
                     <div className={`characterBlock`}>
                         <div className='charactersItem'>
                             <ul>
-                                <DataItem renderItem={(item)=>item.name} onChangeId={(id)=>this.onChangeId(id)} data={new HousesModel().getAllHouses()}/>
+                                <DataItem
+                                    renderItem={(item)=>item.name}
+                                    onChangeId={(dataSelected)=>{this.onChangeId(dataSelected)}}
+                                    data={new HousesModel().getAllHouses()}
+                                    dataId={(id)=>{return new HousesModel().getHouse(id)}}
+
+                                    />
                             </ul>
                         </div>
                         {description()}

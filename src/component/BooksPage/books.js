@@ -2,28 +2,55 @@ import React, {Component} from "react";
 import './books.css'
 import BooksModel from "../../service/BooksModel";
 import DataItem from "../dataList/dataItem";
-import CharacterModel from "../../service/CharacterModel";
+import DescriptionData from "../descriptionCharacter/descriptionData";
+import {Field} from "../Field/field";
 
 export default class Books extends Component{
-    state = {
-        id: null
+    constructor(props) {
+        super(props);
+        this.state = {
+            books: null,
+        }
     }
-    onChangeId(id){
+    onChangeId = (dataSelected)=>{
         this.setState({
-            id:id
+            books: dataSelected,
         })
     }
 
     render() {
+        let {books} = this.state
+        const description = ()=>{
+            if (books === null) return
+            else {
+                return (
+                    <div className={'charactersDescription'}>
+                        <DescriptionData data={books}>
+                            <Field field={`name`} label={`Name`}></Field>
+                            <Field field={`authors`} label={`Authors`}></Field>
+                            <Field field={`numberOfPages`} label={`NumberOfPages`}></Field>
+                            <Field field={`released`} label={`Released`}></Field>
+                        </DescriptionData>
+                    </div>
+                )
+            }
+        }
         return(
             <>
                 <div className={'content'}>
                     <div className={`characterBlock`}>
                         <div className='charactersItem'>
                             <ul>
-                                <DataItem renderItem={(item)=>item.name} onChangeId={(id)=>this.onChangeId(id)} data={new BooksModel().getAllBooks()}/>
+                                <DataItem
+                                    renderItem={(item)=>item.name}
+                                    onChangeId={(dataSelected)=>{this.onChangeId(dataSelected)}}
+                                    data={new BooksModel().getAllBooks()}
+                                    dataId={(id)=>{return new BooksModel().getBook(id)}}
+
+                                />
                             </ul>
                         </div>
+                        {description()}
                     </div>
                 </div>
             </>

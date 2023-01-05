@@ -13,42 +13,22 @@ export default class Characters extends Component{
     constructor(props) {
         super(props);
         this.state = {
-            id: 92,
-            charact: {},
+            charact: null,
         }
     }
-    componentDidMount() {
-        this.charaterModel = new CharacterModel();
-        this.getDataCharacter(this.state.id);
-    }
-    componentDidUpdate(prevProps, prevState, snapshot) {
-        if(this.state.id !== prevState.id){
-            this.getDataCharacter(this.state.id);
-        }
-    }
-
-    getDataCharacter(id){
-        this.charaterModel.getCharacter(id)
-            .then((char)=>{
-                this.setState({
-                    charact: char,
-                })
-            })
-    }
-    onChangeId(id){
+    onChangeId = (dataSelected)=>{
         this.setState({
-                id:id
+                charact: dataSelected,
         })
     }
     render() {
-        // console.log(this.state.charact)
-        let {id} = this.state
+        let {charact} = this.state
         const description = ()=>{
-            if (id === null) return
+            if (charact == null) return
             else {
                 return (
                     <div className={'charactersDescription'}>
-                        <DescriptionData id={id} data={this.state.charact}>
+                        <DescriptionData data={this.state.charact}>
                             <Field field={`gender`} label={`Gender`}></Field>
                             <Field field={`born`} label={`Born`}></Field>
                             <Field field={`died`} label={`Died`}></Field>
@@ -65,7 +45,12 @@ export default class Characters extends Component{
                     <div className={`characterBlock`}>
                         <div className='charactersItem'>
                             <ul>
-                                <DataItem renderItem={(item)=>`${item.name} (${item.gender[0]})`} onChangeId={(id)=>this.onChangeId(id)} data={new CharacterModel().getAllCharacters()}/>
+                                <DataItem
+                                    renderItem={(item)=>`${item.name} (${item.gender[0]})`}
+                                    onChangeId={(dataSelected)=>{this.onChangeId(dataSelected)}}
+                                    data={new CharacterModel().getAllCharacters()}
+                                    dataId={(id)=>{return new CharacterModel().getCharacter(id)}}
+                                />
                             </ul>
                         </div>
                         {description()}

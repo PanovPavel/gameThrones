@@ -13,7 +13,8 @@ export default  class DataItem extends Component{
     }
     state = {
         character: [],
-        selectID: 0
+        selectID: null,
+        dataSelected: {}
     }
     getData(){
         this.data
@@ -26,13 +27,21 @@ export default  class DataItem extends Component{
     componentDidMount() {
         this.getData();
     }
-    onDataSelected(id){
-        this.setState({
-                selectID: id
-        })
-        this.props.onChangeId(id);
+    componentDidUpdate(prevProps, prevState, snapshot) {
+        if(this.state.selectID !== prevState.selectID){
+            this.onDataSelected(this.state.selectID)
+        }
     }
-
+    onDataSelected = (id)=>{
+        this.props.dataId(id)
+            .then((data)=>{
+                this.setState({
+                    selectID: id,
+                    dataSelected: data
+                })
+            })
+        this.props.onChangeId(this.state.dataSelected);
+    }
     render() {
         const {character} = this.state
         const AllChar = character.map((item)=>{

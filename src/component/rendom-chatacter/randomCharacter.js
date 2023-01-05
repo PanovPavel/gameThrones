@@ -1,6 +1,6 @@
 import React,{Component} from "react";
 import './randomCharacter.css'
-import DescriptionCharacter from '../descriptionCharacter/descriptionCharacter'
+import DescriptionData from '../descriptionCharacter/descriptionData'
 
 /**
  * Блок с описание рандомного пресонажа
@@ -42,15 +42,11 @@ class BlockRandom extends Component{
     componentDidMount() {
         this.props.changeRandomId();
     }
-    componentWillUnmount() {
-        console.log(`componentWillUnmount`)
-    }
-
     render() {
         return(
                 <div className={'randomCharacter'}>
                     <div className={'title'}>Random person</div>
-                    <DescriptionCharacter id={this.state.id}/>
+                    <DescriptionData id={this.state.id}/>
                 </div>
         )
     }

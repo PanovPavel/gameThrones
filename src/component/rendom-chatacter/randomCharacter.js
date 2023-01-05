@@ -1,34 +1,47 @@
 import React,{Component} from "react";
 import './randomCharacter.css'
 import DescriptionData from '../descriptionCharacter/descriptionData'
+import CharacterModel from "../../service/CharacterModel";
+import {Field} from "../Field/field";
+import Spinner from "../laod-spinner/spinner";
 
 /**
  * Блок с описание рандомного пресонажа
  */
 export default class RandomCharacter extends Component{
-    constructor(props) {
-        super(props);
-        this.state = {
-            id: Math.floor(Math.random()*100+50),
-            hidden: false
+    state = {
+        hidden: false,
+    }
+    onHiddenBlock(){
+        this.setState((state)=>{
+            return{
+                hidden: !this.state.hidden,
+            }
+        })
+    }
+    changeLoad(){
+        this.setState((state)=>{
+            return{
+                load: true
+            }
+        })
+    }
+    renderItemHidden(){
+        const {hidden, load} = this.state;
+
+        if(!hidden) {
+            return (
+                <>
+                    <BlockRandom getData={(id) => new CharacterModel().getCharacter(id)}/>}
+                </>
+            )
         }
     }
-    changeRandomId(){
-        this.setState({
-                id: Math.floor(Math.random()*100+50)
-        })
-    }
-    onHiddenBlock() {
-        this.setState({
-                hidden: !this.state.hidden
-        })
-    }
     render() {
-        const {hidden, id} = this.state;
         return(
             <>
                 <div className={'content'}>
-                    {hidden? '' : <BlockRandom id={id} changeRandomId={() => this.changeRandomId()}/>}
+                    {this.renderItemHidden()}
                     <button onClick={()=>this.onHiddenBlock()} className={'buttonChangeCharacter'}>Random hidden</button>
                 </div>
             </>
@@ -37,17 +50,46 @@ export default class RandomCharacter extends Component{
 }
 class BlockRandom extends Component{
     state = {
-        id: this.props.id
+        id: Math.floor(Math.random()*100+25),
+        data: {},
+        load: false
     }
     componentDidMount() {
-        this.props.changeRandomId();
+        this.props.getData(this.state.id)
+            .then(data=>{
+                this.setState({
+                    data: data,
+                    load: true
+                })
+            })
+    }
+    loadRender(){
+            return (
+                <>
+                    <div className={'randomCharacter'}>
+                        <div className={'title'}>Random person</div>
+                        <Spinner></Spinner>
+                    </div>
+                </>
+            )
     }
     render() {
+        const {load} = this.state
         return(
-                <div className={'randomCharacter'}>
-                    <div className={'title'}>Random person</div>
-                    <DescriptionData id={this.state.id}/>
-                </div>
+            <>
+                {
+                    (!load) ? this.loadRender() :
+                    <div className={'randomCharacter'}>
+                        <div className={'title'}>Random person</div>
+                        <DescriptionData data={this.state.data}>
+                            <Field field={`name`} label={`Name`}></Field>
+                            <Field field={`born`} label={`Born`}></Field>
+                            <Field field={`died`} label={`Died`}></Field>
+                            <Field field={`culture`} label={`Culture`}></Field>
+                        </DescriptionData>
+                    </div>
+                }
+            </>
         )
     }
 }

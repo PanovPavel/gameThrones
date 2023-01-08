@@ -1,10 +1,10 @@
 import React,{Component} from "react";
 import './characters.css'
-import '../dataList/dataItem'
-import DataItem from "../dataList/dataItem";
-import DescriptionData from "../descriptionCharacter/descriptionData";
-import CharacterModel from "../../service/CharacterModel";
-import {Field} from "../Field/field";
+import '../../dataList/dataItem'
+import DataItem from "../../dataList/dataItem";
+import DescriptionData from "../../descriptionCharacter/descriptionData";
+import CharacterModel from "../../../service/CharacterModel";
+import {Field} from "../../Field/field";
 /**
  * Блок с описание конкретного персонажа
  * @return {JSX.Element}

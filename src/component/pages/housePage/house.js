@@ -1,9 +1,9 @@
 import React, {Component} from "react";
-import DataItem from "../dataList/dataItem";
-import HousesModel from "../../service/HousesModel";
-import CharacterModel from "../../service/CharacterModel";
-import DescriptionData from "../descriptionCharacter/descriptionData";
-import {Field} from "../Field/field";
+import DataItem from "../../dataList/dataItem";
+import HousesModel from "../../../service/HousesModel";
+import CharacterModel from "../../../service/CharacterModel";
+import DescriptionData from "../../descriptionCharacter/descriptionData";
+import {Field} from "../../Field/field";
 export default class House extends Component{
     constructor(props) {
         super(props);

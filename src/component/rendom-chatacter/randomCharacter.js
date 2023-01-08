@@ -19,13 +19,6 @@ export default class RandomCharacter extends Component{
             }
         })
     }
-    changeLoad(){
-        this.setState((state)=>{
-            return{
-                load: true
-            }
-        })
-    }
     renderItemHidden(){
         const {hidden, load} = this.state;
 
